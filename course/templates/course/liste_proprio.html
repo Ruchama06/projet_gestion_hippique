@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Liste des propriétaires</title>
+</head>
+<body>
+    <h1>Liste des propriétaires</h1>
+    <ul>
+        {% for proprietaire in proprietaires %}
+            <li>{{ proprietaire.utilisateur.first_name }} {{ proprietaire.utilisateur.last_name }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
