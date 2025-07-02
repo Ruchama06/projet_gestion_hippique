@@ -10,19 +10,21 @@ class Utilisateur(AbstractUser):
     telephone = models.CharField(max_length=9,default="000000000")
     adresse = models.CharField(max_length=255, default="Inconnue")
 
-# class Proprietaire(models.Model):
-#     utilisateur = models.OneToOneField(Utilisateur, on_delete=models.CASCADE, related_name='proprietaire')
-#     adresse = models.CharField(max_length=255)
+class Proprietaire(models.Model):
+    utilisateur = models.OneToOneField(Utilisateur, on_delete=models.CASCADE, related_name='proprietaire')
+    genre = models.CharField(max_length=10, choices=[('M', 'Masculin'), ('F', 'Féminin')], default='F')  # Genre du propriétaire
 
-# class Entraineur(models.Model):
-#     licence = models.CharField(max_length=50)  # Numéro de licence de l'entraîneur
-#     experience = models.IntegerField()  # Années d'expérience de l'entraîneur
-# class Jockey(models.Model):
-#     nom = models.CharField(max_length=100)
-#     prenom = models.CharField(max_length=100)
-#     email = models.EmailField()
-#     telephone = models.CharField(max_length=15)
-#     adresse = models.CharField(max_length=255) 
+class Entraineur(models.Model):
+    utilisateur = models.OneToOneField(Utilisateur, on_delete=models.CASCADE, related_name='entraineur')
+    specialite = models.CharField(max_length=50)
+    licence = models.CharField(max_length=50)  # Numéro de licence de l'entraîneur
+    experience = models.IntegerField()  # Années d'expérience de l'entraîneur
+
+class Jockey(models.Model):
+    utilisateur = models.OneToOneField(Utilisateur, on_delete=models.CASCADE, related_name='jockey')
+    poids = models.FloatField()
+    taille = models.FloatField()
+    licence = models.CharField(max_length=100)
 
 # class Organisateur(models.Model):
 #     nom = models.CharField(max_length=100)
